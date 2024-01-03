@@ -195,4 +195,46 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
 
 #### Octree Quantization 알고리즘
 
-*
+* 노드 한 개가 최대 8개의 자식 노드를 가질 수 있는 트리 자료구조인 Octree를 사용해서 이미지의 핵심 색상들을 추출해내는 알고리즘입니다.
+> Octree Quantization 알고리즘의 동작 과정
+> 1. 원본 이미지의 모든 픽셀 색상값을 Octree에 삽입
+> 2. 병합 우선 순위가 높은 순서대로 리프 노드가 아닌 노드들을 리프 노드로 병합해서 Octree의 리프 노드 개수를 256개로 감소시킴
+> 3. 리프 노드에 저장된 색상값들을 8비트 컬러 이미지의 팔레트에 삽입
+> 4. 8비트 컬러 이미지의 픽셀에 저장될 팔레트 인덱스 값을 원본 이미지의 픽셀 색상값으로 결정
+* Octree에 원본 이미지의 픽셀 색상값을 삽입하는 과정을 이미지로 표현하면 아래와 같습니다.(설명에 사용된 이미지들은 모두 자체적으로 제작했습니다.)
+
+![OctreeAddColor00](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_00.PNG)
+
+![OctreeAddColor01](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_01.PNG)
+
+![OctreeAddColor02](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_02.PNG)
+
+![OctreeAddColor03](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_03.PNG)
+
+![OctreeAddColor04](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_04.PNG)
+
+![OctreeAddColor05](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_05.PNG)
+
+![OctreeAddColor06](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_06.PNG)
+
+![OctreeAddColor07](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_07.PNG)
+
+![OctreeAddColor08](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_08.PNG)
+
+![OctreeAddColor09](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_09.PNG)
+
+* Octree의 리프 노드가 아닌 노드들을 병합하는 과정을 이미지로 표현하면 아래와 같습니다.(설명에 사용된 이미지들은 모두 자체적으로 제작했습니다.)
+
+![OctreeReduction00](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_reduction_00.PNG)
+
+![OctreeReduction01](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_reduction_01.PNG)
+
+![OctreeReduction02](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_reduction_02.PNG)
+
+![OctreeReduction03](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_reduction_03.PNG)
+
+![OctreeReduction04](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_reduction_04.PNG)
+
+![OctreeReduction05](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_reduction_05.PNG)
+
+![OctreeReduction06](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_reduction_06.PNG)
