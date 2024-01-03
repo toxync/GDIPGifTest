@@ -440,9 +440,11 @@ BOOL GifAsmDlg::PreTranslateMessage(MSG* pMsg)
 afx_msg LRESULT GifAsmDlg::On15002(WPARAM wParam, LPARAM lParam)
 {
 	FrameThreadData* p_data = m_progress_dlg.GetThreadDataPtr();
-	// 메인 다이얼로그에게 이 다이얼로그의 종료 준비 상태 알림 메시지를 보냄(이 다이얼로그에서는
-	// 추가 스레드를 사용하기 때문에 스레드의 실행 상태에 따라 종료 준비 상태를 설정함)
-	::PostMessage(GetParent()->m_hWnd, TABWND_CLOSE_READY, ((p_data) ? 0 : 1), 0);
+	// 작업 스레드가 실행중이거나 8비트 변환된 프레임 미리 보기 다이얼로그가 생성된 상태라면
+	// 이 다이얼로그의 종료 준비 상태를 거짓으로 설정함
+	wParam = (p_data ? 0 : 1) & (m_preview_dlg.m_hWnd ? 0 : 1);
+	// 메인 다이얼로그에게 이 다이얼로그의 종료 준비 상태 알림 메시지를 보냄
+	::PostMessage(GetParent()->m_hWnd, TABWND_CLOSE_READY, wParam, 0);
 	return 0;
 }
 
