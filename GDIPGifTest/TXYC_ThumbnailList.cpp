@@ -2,6 +2,8 @@
 #include "TXYC_ListBox.h"
 #include "TXYC_ThumbnailList.h"
 
+#pragma comment(lib, "TXYC_ListBox.lib")
+
 TXYC_ThumbnailListBox::TXYC_ThumbnailListBox()
 {
 	// 리스트 박스가 사용할 색상 정보를 구성함
@@ -51,10 +53,8 @@ void TXYC_ThumbnailListBox::UserDraw(HDC ah_dc, RECT* ap_rect, void* ap_data)
 		GpGraphics* p_graphics = NULL;
 		GdipCreateFromHDC(ah_dc, &p_graphics); // HDC에 연결해서 사용하는 GDI+ 출력 객체 생성
 		// 항목에 썸네일 이미지 출력
-		int x = ap_rect->left + m_item_padding;
-		int y = ap_rect->top + m_item_padding;
-		int width = m_item_width - m_item_padding * 2;
-		int height = m_item_height - m_item_padding * 2;
+		int x = ap_rect->left + m_item_padding, y = ap_rect->top + m_item_padding;
+		int width = m_item_width - m_item_padding * 2, height = m_item_height - m_item_padding * 2;
 		GdipDrawImageRectI(p_graphics, p_data->p_image, x, y, width, height);
 		GdipDeleteGraphics(p_graphics); // 사용하던 GDI+ 출력 객체 제거
 	}
@@ -64,8 +64,7 @@ void TXYC_ThumbnailListBox::InsertThumbnailImage(GpImage* ap_image)
 {
 	ItemThumbData* p_data = new ItemThumbData;
 	// 여백이 적용된 썸네일 이미지 크기를 설정함
-	int thumb_cx = m_item_width - m_item_padding * 2;
-	int thumb_cy = m_item_height - m_item_padding * 2;
+	int thumb_cx = m_item_width - m_item_padding * 2, thumb_cy = m_item_height - m_item_padding * 2;
 	// 썸네일 이미지를 생성해서 저장함
 	p_data->p_image = m_gdip.CreateThumbnail(ap_image, thumb_cx, thumb_cy);
 	SetItemDataPtr(AddString(L""), p_data);

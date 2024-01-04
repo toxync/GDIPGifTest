@@ -225,7 +225,6 @@
     <ClCompile Include="TXYC_CustomProgress.cpp" />
     <ClCompile Include="TXYC_FrameList.cpp" />
     <ClCompile Include="TXYC_GDIP.cpp" />
-    <ClCompile Include="TXYC_ListBox.cpp" />
     <ClCompile Include="TXYC_ThumbnailList.cpp" />
   </ItemGroup>
   <ItemGroup>

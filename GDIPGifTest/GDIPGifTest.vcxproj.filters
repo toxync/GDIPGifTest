@@ -101,9 +101,6 @@
     <ClCompile Include="TXYC_GDIP.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="TXYC_ListBox.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="TXYC_ThumbnailList.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>

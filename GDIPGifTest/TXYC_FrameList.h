@@ -2,9 +2,6 @@
 #define _TXYC_FRAME_LIST_BOX_H_
 
 // 클래스 작성자: 박정현(bac6536@naver.com)
-// 이 클래스는 다른 개발자가 작성한 클래스를 기반으로 작성되었음
-// 원본 클래스 작성자: 김성엽(tipsware@naver.com)
-// 원본 클래스 배포 주소: https://cafe.naver.com/migagong
 
 #include "TXYC_GDIP.h"
 
@@ -35,8 +32,6 @@ public:
 	// WM_DESTROY 메시지를 사용하지 않고 리스트 박스가 제거될 때 함께 작업해야 할 내용을
 	// 추가하기 위해 제공되는 함수
 	virtual void DeleteUserObject();
-	// 리스트 박스의 항목이 삭제될 때 항목이 가지고 있던 추가 메모리를 해제하는 함수
-//	virtual void DeleteItem(LPDELETEITEMSTRUCT lpDeleteItemStruct);
 	// 각 항목에 출력될 정보를 그리는 함수
 	virtual void UserDraw(HDC ah_dc, RECT* ap_rect, void* ap_data);
 	// 리스트 박스 항목의 추가 메모리를 제거하면서 모든 항목을 제거하는 함수

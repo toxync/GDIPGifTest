@@ -151,7 +151,7 @@ void TXYC_ListBox::OnLbnDblclk()
 	// 1이 되기 때문에 마우스가 현재 가리키고 있는 항목이 없는지 확인할 때에는 ItemFromPoint() 함수의
 	// 반환값과 ItemFromPoint() 함수의 두 번째 인자로 넘겨준 BOOL 값을 모두 확인하는 것이 안전함)
 	UINT index = ItemFromPoint(m_last_dbclk_pos, out_side_flag);
-	UINT check_index = GetCurSel();
+	int check_index = GetCurSel();
 	if (!out_side_flag && index == check_index)
 	{
 		// index 위치가 유효할 경우에만 더블 클릭을 수행함

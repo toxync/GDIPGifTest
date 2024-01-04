@@ -2,9 +2,6 @@
 #define _TXYC_THUMBNAIL_LIST_BOX_H_
 
 // 클래스 작성자: 박정현(bac6536@naver.com)
-// 이 클래스는 다른 개발자가 작성한 클래스를 기반으로 작성되었음
-// 원본 클래스 작성자: 김성엽(tipsware@naver.com)
-// 원본 클래스 배포 주소: https://cafe.naver.com/migagong
 
 #include "TXYC_GDIP.h"
 

@@ -11,14 +11,14 @@ class TXYC_ListBox : public CListBox
 {
 	DECLARE_DYNAMIC(TXYC_ListBox)
 protected:
-	HBRUSH mh_list_bk_brush; // 리스트 박스 배경색으로 사용할 브러시 객체
+	HBRUSH mh_list_bk_brush = NULL; // 리스트 박스 배경색으로 사용할 브러시 객체
 	// 상황별 브러시 색상을 기억할 변수들
 	COLORREF m_select_brush_color, m_focus_brush_color, m_bk_brush_color;
 	// 상황별 펜 색상을 기억할 변수들
 	COLORREF m_select_pen_color, m_focus_pen_color, m_bk_pen_color;
 	// 현재 처리중인 Owner-Draw 구조체 정보(매개 변수로 계속 넘기지 않기 위해 구조체 주소를
 	// 보관해서 사용, 나중에 사용하면 주소가 유효하지 않을 수 있으니 주의해야 함)
-	LPDRAWITEMSTRUCT mp_last_lpds;
+	LPDRAWITEMSTRUCT mp_last_lpds = NULL;
 	CPoint m_last_dbclk_pos; // 리스트 박스를 마우스로 더블 클릭했을 때의 좌표
 public:
 	TXYC_ListBox();
