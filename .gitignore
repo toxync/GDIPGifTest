@@ -3,8 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-#Ignore Library Source files
-TXYC_ListBox.cpp
+#ignore Library Source files
+GDIPGifTest/TXYC_ListBox.cpp
 
 # User-specific files
 *.rsuser
