@@ -6,36 +6,6 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
 
 * GDIPGifTestDlg.h
   - 캡션 탭 다이얼로그(자식 비정형 다이얼로그)들을 관리하는 프로그램의 메인 다이얼로그입니다.
-* TXYC_CustomCaption.h
-  - 캡션 탭 다이얼로그 관리 기능을 제공하는 클래스입니다.
-  - 메인 다이얼로그는 CDialog 클래스와 이 클래스를 다중상속 받습니다.
-* TXYC_CaptionControl.h
-  - 메인 다이얼로그와 캡션 탭 다이얼로그 간의 통신에 사용할 메시지 번호들입니다.
-* TXYC_GDIP.h
-  - GDI+ 기능들을 제공하는 클래스입니다.
-* TXYC_ListBox.h
-  - CListBox 클래스를 상속 받은 사용자 정의 리스트 박스 클래스입니다.
-* TXYC_ThumbnailList.h
-  - TXYC_ListBox 클래스를 상속 받은 사용자 정의 리스트 박스 클래스입니다.
-  - 읽어들인 GIF 이미지 프레임들의 섬네일을 보여주는 용도로 사용됩니다.
-  - GifDasmDlg 다이얼로그에서만 사용됩니다.
-* TXYC_FrameList.h
-  - TXYC_ListBox 클래스를 상속 받은 사용자 정의 리스트 박스 클래스입니다.
-  - 읽어들인 이미지들의 섬네일을 보여주는 용도로 사용됩니다.
-  - GIF 이미지 제작에 사용할 이미지 데이터를 보관하는 용도로 사용됩니다.
-  - GifAsmDlg 다이얼로그에서만 사용됩니다.
-* TXYC_FrameThreadData.h
-  - 작업 스레드가 사용할 데이터 구조체가 선언되어 있습니다.
-  - 사용할 벡터 자료구조의 자료형이 선언되어 있습니다.
-  - GifAsmDlg 다이얼로그와 작업 진행 상태 확인 다이얼로그에서만 사용됩니다.
-* TXYC_CustomProgress.h
-  - GDI+ 출력을 사용하는 사용자 정의 프로그레스 컨트롤 윈도우입니다.
-  - 작업 진행 상태 확인 다이얼로그에서만 사용됩니다.
-* RectPositionFunc.h
-  - 사각형 영역의 종횡비를 유지하면서 다른 사각형 영역의 정중앙에 위치시키는 함수들입니다.
-* OctreeQuantizer.h
-  - [Octree Quantization 알고리즘](#octree-quantization-알고리즘) 기능을 제공하는 클래스입니다.
-  - GifAsmDlg 다이얼로그에서만 사용됩니다.
 * GifDasmDlg.h
   - GIF 이미지 분해 기능을 제공하는 캡션 탭 다이얼로그입니다.
 * GifAsmDlg.h
@@ -48,6 +18,38 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
 * PreviewDlg.h
   - 특정 이미지의 8비트 컬러 변환 결과를 보여주는 용도로 사용되는 다이얼로그입니다.
   - GifAsmDlg 다이얼로그에서만 사용됩니다.
+* TXYC_CustomCaption.h
+  - 캡션 탭 다이얼로그 관리 기능을 제공하는 클래스입니다.
+  - 메인 다이얼로그는 CDialog 클래스와 이 클래스를 다중상속 받습니다.
+* TXYC_CaptionControl.h
+  - 메인 다이얼로그와 캡션 탭 다이얼로그 간의 통신에 사용할 메시지 번호들입니다.
+* TXYC_GDIP.h
+  - GDI+ 기능들을 제공하는 클래스입니다.
+  - 프로젝트 안에서 광범위하게 사용되기 때문에 미리 컴파일된 헤더 안에 포함되어 있습니다.
+* TXYC_ListBox.h
+  - CListBox 클래스를 상속 받은 사용자 정의 리스트 박스 클래스입니다.
+* TXYC_ThumbnailList.h
+  - TXYC_ListBox 클래스를 상속 받은 사용자 정의 리스트 박스 클래스입니다.
+  - 읽어들인 GIF 이미지 프레임들의 섬네일을 보여주는 용도로 사용됩니다.
+  - GifDasmDlg 다이얼로그에서만 사용됩니다.
+* TXYC_FrameList.h
+  - TXYC_ListBox 클래스를 상속 받은 사용자 정의 리스트 박스 클래스입니다.
+  - 읽어들인 이미지들의 섬네일을 보여주는 용도로 사용됩니다.
+  - GIF 이미지 제작에 사용할 이미지 데이터를 보관하는 용도로 사용됩니다.
+  - GifAsmDlg 다이얼로그에서만 사용됩니다.
+* TXYC_FrameThreadData.h
+  - 작업 스레드가 사용할 함수들이 선언되어 있습니다.
+  - 작업 스레드가 사용할 데이터 구조체가 선언되어 있습니다.
+  - 사용할 벡터 자료구조의 자료형이 선언되어 있습니다.
+  - GifAsmDlg 다이얼로그와 작업 진행 상태 확인 다이얼로그에서만 사용됩니다.
+* TXYC_CustomProgress.h
+  - GDI+ 출력을 사용하는 사용자 정의 프로그레스 컨트롤 윈도우입니다.
+  - 작업 진행 상태 확인 다이얼로그에서만 사용됩니다.
+* TXYC_RectPositionFunc.h
+  - 사각형 영역의 종횡비를 유지하면서 다른 사각형 영역의 정중앙에 위치시키는 함수들입니다.
+* TXYC_OctreeQuantizer.h
+  - [Octree Quantization 알고리즘](#octree-quantization-알고리즘) 기능을 제공하는 클래스입니다.
+  - GifAsmDlg 다이얼로그의 작업 스레드에서만 사용됩니다.
 
 ## 기능 소개
 
