@@ -5,6 +5,7 @@
 
 #ignore Library Source files
 TXYC_ListBox.cpp
+TXYC_GDIP.cpp
 
 # User-specific files
 *.rsuser

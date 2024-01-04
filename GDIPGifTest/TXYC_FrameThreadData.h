@@ -1,7 +1,8 @@
 #ifndef _TXYC_FRAME_THREAD_DATA_H_
 #define _TXYC_FRAME_THREAD_DATA_H_
 
-#include <gdiplus.h>
+#include "TXYC_OctreeQuantizer.h"
+#include "TXYC_RectPositionFunc.h"
 #include <vector>
 
 // 작업 스레드가 정상적으로 종료됐을 때 스레드를 생성한 다이얼로그로 보낼 때 사용할 메시지 번호
@@ -22,7 +23,6 @@
 #define POST_TRD_ACT_CREATE_GIF 3
 
 using std::vector;
-using namespace Gdiplus;
 
 // 프레임 벡터의 한 항목에 저장할 프레임 이미지 관련 데이터
 typedef struct _FrameData
@@ -47,5 +47,10 @@ typedef struct _FrameThreadData
 	// 작업 스레드가 종료된 뒤에 수행할 동작의 종류를 구분하기 위한 변수
 	UINT8 post_thread_action;
 } FrameThreadData;
+
+// 작업 대상 이미지들의 프레임 이미지를 생성하는 스레드가 사용하는 함수
+DWORD WINAPI CreateFrameBitmaps(void* ap_data);
+// 작업 대상 프레임 이미지들의 8비트 변환된 이미지를 생성하는 스레드가 사용하는 함수
+DWORD WINAPI ConvertFrameBitmaps(void* ap_data);
 
 #endif // !_TXYC_FRAME_THREAD_DATA_H_

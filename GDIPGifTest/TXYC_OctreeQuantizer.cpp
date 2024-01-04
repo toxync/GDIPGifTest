@@ -1,18 +1,18 @@
 #include "pch.h"
-#include "OctreeQuantizer.h"
+#include "TXYC_OctreeQuantizer.h"
 
 // 팔진 트리의 최대 깊이 초기화
-UINT8 OctreeQuantizer::m_max_depth = 7;
+UINT8 TXYC_OctreeQuantizer::m_max_depth = 7;
 
-OctreeQuantizer::OctreeQuantizer()
+TXYC_OctreeQuantizer::TXYC_OctreeQuantizer()
 {
 }
 
-OctreeQuantizer::~OctreeQuantizer()
+TXYC_OctreeQuantizer::~TXYC_OctreeQuantizer()
 {
 }
 
-OctreeQuantizer::OctreeNode::OctreeNode(UINT8 a_depth, OctreeNode* ap_reduce_head, UINT* ap_leaf_cnt)
+TXYC_OctreeQuantizer::OctreeNode::OctreeNode(UINT8 a_depth, OctreeNode* ap_reduce_head, UINT* ap_leaf_cnt)
 	:m_depth(a_depth)
 {
 	memset(mp_child, 0, sizeof(mp_child));
@@ -30,7 +30,7 @@ OctreeQuantizer::OctreeNode::OctreeNode(UINT8 a_depth, OctreeNode* ap_reduce_hea
 	}
 }
 
-OctreeQuantizer::OctreeNode::~OctreeNode()
+TXYC_OctreeQuantizer::OctreeNode::~OctreeNode()
 {
 	for (int i = 0; i < 8; ++i)
 	{
@@ -42,7 +42,7 @@ OctreeQuantizer::OctreeNode::~OctreeNode()
 	}
 }
 
-void OctreeQuantizer::OctreeNode::SetColor(UINT a_color, OctreeNode* ap_reduce_head, UINT* ap_leaf_cnt)
+void TXYC_OctreeQuantizer::OctreeNode::SetColor(UINT a_color, OctreeNode* ap_reduce_head, UINT* ap_leaf_cnt)
 {
 	++m_pixel_cnt; // 현재 노드에 소속된 픽셀 개수를 증가시킴
 	// 현재 노드가 리프 노드가 아닐 경우
@@ -73,7 +73,7 @@ void OctreeQuantizer::OctreeNode::SetColor(UINT a_color, OctreeNode* ap_reduce_h
 	}
 }
 
-UINT8 OctreeQuantizer::OctreeNode::GetChildIndex(UINT a_color) const
+UINT8 TXYC_OctreeQuantizer::OctreeNode::GetChildIndex(UINT a_color) const
 {
 	// 색상값의 R, G, B 바이트에서 추출한 (7 - 현재 노드 깊이)번째 비트 값들을 R 값은 2번 비트,
 	// G 값은 1번 비트, B 값은 0번 비트인 0 ~ 7 사이의 자식 노드 인덱스가 되도록 조합함
@@ -83,7 +83,7 @@ UINT8 OctreeQuantizer::OctreeNode::GetChildIndex(UINT a_color) const
 	return index;
 }
 
-UINT8 OctreeQuantizer::OctreeNode::GetPaletteIndex(UINT a_color) const
+UINT8 TXYC_OctreeQuantizer::OctreeNode::GetPaletteIndex(UINT a_color) const
 {
 	// 현재 노드가 리프 노드라면 현재 노드의 팔레트 인덱스 값을 반환함
 	if (!m_child_cnt)
@@ -99,7 +99,7 @@ UINT8 OctreeQuantizer::OctreeNode::GetPaletteIndex(UINT a_color) const
 	}
 }
 
-void OctreeQuantizer::OctreeNode::ReduceOctree(UINT* ap_leaf_cnt)
+void TXYC_OctreeQuantizer::OctreeNode::ReduceOctree(UINT* ap_leaf_cnt)
 {
 	for (int i = 0; i < 8; ++i)
 	{
@@ -123,7 +123,7 @@ void OctreeQuantizer::OctreeNode::ReduceOctree(UINT* ap_leaf_cnt)
 	}
 }
 
-void OctreeQuantizer::OctreeNode::FillPalette(ARGB* ap_palette_entry, UINT8* ap_index)
+void TXYC_OctreeQuantizer::OctreeNode::FillPalette(ARGB* ap_palette_entry, UINT8* ap_index)
 {
 	// 현재 노드가 리프 노드라면 현재 노드의 색상값을 팔레트에 저장함
 	if (!m_child_cnt)
@@ -154,7 +154,7 @@ void OctreeQuantizer::OctreeNode::FillPalette(ARGB* ap_palette_entry, UINT8* ap_
 	}
 }
 
-void OctreeQuantizer::OctreeNode::UpdateReducePriority()
+void TXYC_OctreeQuantizer::OctreeNode::UpdateReducePriority()
 {
 	OctreeNode* p_new_next_reducible = mp_next_reducible;
 	// 병합 예정 노드 리스트 안에서 현재 노드의 다음 위치에 노드가 존재하며 현재 노드가 다음 위치 노드보다
@@ -171,14 +171,14 @@ void OctreeQuantizer::OctreeNode::UpdateReducePriority()
 		InsertBefore(p_new_next_reducible);
 	}
 }
-void OctreeQuantizer::OctreeNode::RemoveFromReducibles()
+void TXYC_OctreeQuantizer::OctreeNode::RemoveFromReducibles()
 {
 	// 현재 노드 이전 위치 노드의 다음 노드 = 현재 노드의 다음 노드
 	mp_prev_reducible->mp_next_reducible = mp_next_reducible;
 	// 현재 노드 다음 위치 노드의 이전 노드 = 현재 노드 이전 노드
 	mp_next_reducible->mp_prev_reducible = mp_prev_reducible;
 }
-void OctreeQuantizer::OctreeNode::InsertBefore(OctreeNode* ap_next_reducible)
+void TXYC_OctreeQuantizer::OctreeNode::InsertBefore(OctreeNode* ap_next_reducible)
 {
 	// 현재 노드의 이전 노드 = 매개 변수로 넘겨 받은 노드의 이전 위치 노드
 	mp_prev_reducible = ap_next_reducible->mp_prev_reducible;
@@ -190,13 +190,13 @@ void OctreeQuantizer::OctreeNode::InsertBefore(OctreeNode* ap_next_reducible)
 	mp_next_reducible->mp_prev_reducible = this;
 }
 
-void OctreeQuantizer::OctreeNode::InsertAfter(OctreeNode* ap_prev_reducible)
+void TXYC_OctreeQuantizer::OctreeNode::InsertAfter(OctreeNode* ap_prev_reducible)
 {
 	// 현재 노드를 매개 변수로 넘겨 받은 노드의 다음 노드 이전 위치에 삽입함
 	InsertBefore(ap_prev_reducible->mp_next_reducible);
 }
 
-GpBitmap* OctreeQuantizer::GetQuantizedFrame(GpBitmap* ap_src_bmp, UINT8 a_max_depth)
+GpBitmap* TXYC_OctreeQuantizer::GetQuantizedFrame(GpBitmap* ap_src_bmp, UINT8 a_max_depth)
 {
 	// 팔진 트리의 최대 깊이를 제한함
 	m_max_depth = a_max_depth;

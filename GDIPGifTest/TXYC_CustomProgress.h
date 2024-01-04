@@ -6,8 +6,6 @@
 // 원본 클래스 작성자: 김성엽(tipsware@naver.com)
 // 원본 클래스 배포 주소: https://cafe.naver.com/mythread
 
-#include "TXYC_GDIP.h"
-
 // 프로그레스 바에 출력될 문자열의 길이
 #define PROGRESS_STR_LEN 16
 

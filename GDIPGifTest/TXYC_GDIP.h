@@ -99,6 +99,10 @@ public:
 	void DestroyImage(GpImage* ap_image); // 이미지 객체 제거 함수
 	// 지정한 이미지로 a_width * a_height 크기의 섬네일 이미지를 생성하는 함수
 	GpImage* CreateThumbnail(GpImage* ap_src_image, int a_width, int a_height);
+	// 매개 변수로 넘겨 받은 비트맵들을 묶어서 GIF 이미지를 제작하는 함수
+	GpImage* CreateGif(const wchar_t* ap_path, GpBitmap** ap_frame_list, UINT a_frame_cnt, UINT a_delay);
+	// GIF 이미지의 속성값들을 구하는 함수
+	UINT GetGifData(GpImage* ap_gif, GUID** ap_id_list, PropertyItem** ap_item, UINT** ap_delay_list);
 	UINT GetEncoderClsid(const wchar_t* ap_format, CLSID* ap_clsid); // 이미지 인코더의 CLSID 값을 얻는 함수
 	GpPen* GetStockPen(); // 내부적으로 생성되어 있는 펜 객체의 주소를 얻는 함수
 	GpBrush* GetStockBrush(); // 내부적으로 생성되어 있는 브러시 객체의 주소를 얻는 함수

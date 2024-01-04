@@ -1,12 +1,10 @@
-#ifndef _OCTREE_QUANTIZER_
-#define _OCTREE_QUANTIZER_
+#ifndef _TXYC_OCTREE_QUANTIZER_
+#define _TXYC_OCTREE_QUANTIZER_
 
 // 클래스 작성자: 박정현(bac6536@naver.com)
 // 이 클래스는 다른 개발자가 작성한 클래스를 기반으로 작성되었음
 // 원본 클래스 작성자: Sjaak Priester(sjaak@sjaakpriester.nl)
 // 원본 클래스 배포 주소: https://www.codeguru.com/multimedia/better-gifs-with-octrees/
-
-#include "TXYC_GDIP.h"
 
 // RGB 색상값에서 R 값만 추출하는 연산
 #define R_RGB(rgb) (UINT8)(rgb >> 16)
@@ -23,18 +21,18 @@ typedef struct _GifPalette
 	ARGB Entries[GIF_PALETTE_COLORS - 1];
 } GifPalette;
 
-class OctreeQuantizer
+class TXYC_OctreeQuantizer
 {
 public:
-	OctreeQuantizer();
-	~OctreeQuantizer();
+	TXYC_OctreeQuantizer();
+	~TXYC_OctreeQuantizer();
 protected:
 	// 팔진 트리의 노드
 	class OctreeNode
 	{
-		// OctreeQuantizer 클래스가 OctreeNode 클래스의 private 멤버들을 자유롭게 사용할 수 있도록
+		// TXYC_OctreeQuantizer 클래스가 OctreeNode 클래스의 private 멤버들을 자유롭게 사용할 수 있도록
 		// friend 클래스로 등록함
-		friend class OctreeQuantizer;
+		friend class TXYC_OctreeQuantizer;
 		OctreeNode(UINT8 a_depth, OctreeNode* ap_reduce_head, UINT* ap_leaf_cnt);
 		~OctreeNode();
 		// 팔진 트리에 노드를 추가하는 함수
@@ -87,4 +85,4 @@ public:
 	GpBitmap* GetQuantizedFrame(GpBitmap* ap_src_bmp, UINT8 a_max_depth);
 };
 
-#endif // !_OCTREE_QUANTIZER_
+#endif // !_TXYC_OCTREE_QUANTIZER_

@@ -3,28 +3,25 @@
 #include "TXYC_CaptionControl.h"
 #include "TXYC_ListBox.h"
 #include "TXYC_ThumbnailList.h"
-#include "RectPositionFunc.h"
+#include "TXYC_RectPositionFunc.h"
 
 // GifDasmDlg 대화 상자
 class GifDasmDlg : public CDialog
 {
 	DECLARE_DYNAMIC(GifDasmDlg)
 private:
-	CSplitButton m_save_frame_btn; // 프레임 저장 방식을 결정하기 위한 스플릿 버튼
 	TXYC_GDIP m_gdip;
+	TXYC_ThumbnailListBox m_thumbnail_list;
+	CSplitButton m_save_frame_btn; // 프레임 저장 방식을 결정하기 위한 스플릿 버튼
 	GpImage* mp_gif_image = NULL; // 읽어들인 GIF 이미지 객체의 주소
-	// GpBitmap** mp_frame_list = NULL; // 읽어들인 GIF 이미지의 모든 프레임을 저장한 배열
-	UINT m_dim_count = 0; // 읽어들인 GIF 이미지의 내용에서 추출한 프레임 그룹 개수
 	GUID* mp_id_list = NULL; // 읽어들인 GIF 이미지의 첫 번째 프레임 GUID 목록
-	// 첫 프레임 그룹에 포함된 프레임 수, 프레임 정보의 크기, 현재 재생중인 프레임의 번호
-	UINT m_frame_count = 0, m_total_size = 0, m_frame_index = 0;
-	UINT m_gif_width = 0, m_gif_height = 0; // 읽어들인 GIF 이미지의 폭과 높이
-	// 프레임과 프레임 사이의 지연 시간이 저장된 목록 주소
-	UINT* mp_delay_list;
 	PropertyItem* mp_item = NULL; // 프레임의 속성 정보
+	// 프레임 지연 시간이 저장된 목록의 주소
+	UINT* mp_delay_list;
+	// 첫 프레임 그룹에 포함된 프레임 수, 현재 재생중인 프레임의 번호, 읽어들인 GIF 이미지의 폭과 높이
+	UINT m_frame_count = 0, m_frame_index = 0, m_gif_width = 0, m_gif_height = 0;
 	// GIF 이미지의 재생 상태 정보(0: 정지, 1: 재생중)
 	UINT8 m_play_flag = 0;
-	TXYC_ThumbnailListBox m_thumbnail_list;
 	RECT m_frame_viewer_rect = { 0 }; // 읽어들인 GIF 이미지의 프레임을 그리는 출력 공간의 좌표
 	RECT m_gif_display_rect = { 0 }; // 프레임 출력 공간 안에 그려질 프레임 이미지의 좌표
 	// 읽어들인 GIF 이미지의 확장자와 파일 경로를 제외한 파일 이름 문자열

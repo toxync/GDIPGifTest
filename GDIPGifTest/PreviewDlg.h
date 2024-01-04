@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "afxdialogex.h"
-#include "TXYC_GDIP.h"
-#include "RectPositionFunc.h"
+#include "TXYC_RectPositionFunc.h"
 
 // PreviewDlg 대화 상자
 class PreviewDlg : public CDialog

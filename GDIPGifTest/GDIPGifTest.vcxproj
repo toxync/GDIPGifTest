@@ -189,11 +189,11 @@
     <ClInclude Include="GifAsmDlg.h" />
     <ClInclude Include="GifDasmDlg.h" />
     <ClInclude Include="GifExtraDlg.h" />
-    <ClInclude Include="OctreeQuantizer.h" />
+    <ClInclude Include="TXYC_OctreeQuantizer.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PreviewDlg.h" />
     <ClInclude Include="ProgressDlg.h" />
-    <ClInclude Include="RectPositionFunc.h" />
+    <ClInclude Include="TXYC_RectPositionFunc.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TXYC_CustomCaption.h" />
@@ -211,7 +211,8 @@
     <ClCompile Include="GifAsmDlg.cpp" />
     <ClCompile Include="GifDasmDlg.cpp" />
     <ClCompile Include="GifExtraDlg.cpp" />
-    <ClCompile Include="OctreeQuantizer.cpp" />
+    <ClCompile Include="TXYC_FrameThreadData.cpp" />
+    <ClCompile Include="TXYC_OctreeQuantizer.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -220,11 +221,10 @@
     </ClCompile>
     <ClCompile Include="PreviewDlg.cpp" />
     <ClCompile Include="ProgressDlg.cpp" />
-    <ClCompile Include="RectPositionFunc.cpp" />
+    <ClCompile Include="TXYC_RectPositionFunc.cpp" />
     <ClCompile Include="TXYC_CustomCaption.cpp" />
     <ClCompile Include="TXYC_CustomProgress.cpp" />
     <ClCompile Include="TXYC_FrameList.cpp" />
-    <ClCompile Include="TXYC_GDIP.cpp" />
     <ClCompile Include="TXYC_ThumbnailList.cpp" />
   </ItemGroup>
   <ItemGroup>

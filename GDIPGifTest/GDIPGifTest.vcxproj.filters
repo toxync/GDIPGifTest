@@ -33,7 +33,7 @@
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="RectPositionFunc.h">
+    <ClInclude Include="TXYC_RectPositionFunc.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TXYC_CustomCaption.h">
@@ -72,7 +72,7 @@
     <ClInclude Include="TXYC_CustomProgress.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="OctreeQuantizer.h">
+    <ClInclude Include="TXYC_OctreeQuantizer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PreviewDlg.h">
@@ -89,16 +89,13 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="RectPositionFunc.cpp">
+    <ClCompile Include="TXYC_RectPositionFunc.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="TXYC_CustomCaption.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="TXYC_FrameList.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="TXYC_GDIP.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="TXYC_ThumbnailList.cpp">
@@ -119,10 +116,13 @@
     <ClCompile Include="TXYC_CustomProgress.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="OctreeQuantizer.cpp">
+    <ClCompile Include="TXYC_OctreeQuantizer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PreviewDlg.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TXYC_FrameThreadData.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

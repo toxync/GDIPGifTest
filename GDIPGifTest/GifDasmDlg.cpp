@@ -19,30 +19,10 @@ GifDasmDlg::~GifDasmDlg()
 void GifDasmDlg::LoadGif(const wchar_t* ap_path)
 {
 	mp_gif_image = m_gdip.LoadImage(ap_path); // GIF 이미지를 읽어옴
+	m_frame_count = m_gdip.GetGifData(mp_gif_image, &mp_id_list, &mp_item, &mp_delay_list);
 	// 읽어들인 GIF 이미지 프레임의 폭과 높이를 저장함
 	GdipGetImageWidth(mp_gif_image, &m_gif_width);
 	GdipGetImageHeight(mp_gif_image, &m_gif_height);
-	// 프레임 배열의 수를 얻어옴((GIF 이미지의 전체 프레임 수) = (프레임 인덱스) * (애니메이션 개수))
-	GdipImageGetFrameDimensionsCount(mp_gif_image, &m_dim_count);
-	// 프레임 배열에 대한 GUID를 저장할 메모리를 할당함
-	mp_id_list = new GUID[m_dim_count];
-	// 프레임 그룹에 대한 GUID를 얻음
-	GdipImageGetFrameDimensionsList(mp_gif_image, mp_id_list, m_dim_count);
-	// 현재 프레임 그룹에 대한 프레임 개수를 얻음
-	GdipImageGetFrameCount(mp_gif_image, mp_id_list, &m_frame_count);
-	// GIF 이미지의 모든 프레임을 저장하기 위한 배열 생성
-	// mp_frame_list = new GpBitmap * [m_frame_count];
-	// 프레임간의 지연 시간이 포함되어 있는 정보의 크기를 얻음
-	GdipGetPropertyItemSize(mp_gif_image, PropertyTagFrameDelay, &m_total_size);
-	// 지연 시간 정보를 저장하기 위한 메모리를 할당함
-	mp_item = (PropertyItem*)malloc(m_total_size);
-	// 지연 시간 정보를 얻어옴
-	GdipGetPropertyItem(mp_gif_image, PropertyTagFrameDelay, m_total_size, mp_item);
-	// 프레임 지연 시간 목록을 얻어옴
-	mp_delay_list = (UINT*)mp_item[0].value;
-	// GpGraphics* p_graphics = NULL;
-	// PixelFormat image_format;
-	// GdipGetImagePixelFormat(mp_gif_image, &image_format);
 	GUID guid = FrameDimensionTime;
 	// 프레임 개수만큼 썸네일 이미지를 생성하여 썸네일 리스트 박스에 추가
 	for (UINT i = 0; i < m_frame_count; ++i)
@@ -51,13 +31,6 @@ void GifDasmDlg::LoadGif(const wchar_t* ap_path)
 		GdipImageSelectActiveFrame(mp_gif_image, &guid, i);
 		// 현재 프레임에 대한 썸네일 이미지를 생성해서 썸네일 리스트 박스에 추가
 		m_thumbnail_list.InsertThumbnailImage(mp_gif_image);
-		// 프레임 목록에 현재 프레임을 추가
-		/*
-		GdipCreateBitmapFromScan0(m_gif_width, m_gif_height, 0, image_format, NULL, (mp_frame_list + i));
-		GdipGetImageGraphicsContext(mp_frame_list[i], &p_graphics);
-		GdipDrawImageI(p_graphics, mp_gif_image, 0, 0);
-		GdipDeleteGraphics(p_graphics);
-		*/
 	}
 	// 출력 공간의 좌측 상단 좌표랑 일치하는 좌측 상단 좌표와 설정한 좌측 상단 좌표에다가
 	// GIF 이미지 프레임의 원래 폭과 높이가 적용된 우측 하단 좌표로 구성된 사각형 좌표를
@@ -86,14 +59,6 @@ void GifDasmDlg::DestroyGif()
 	m_thumbnail_list.ResetContent();
 	m_gdip.DestroyImage(mp_gif_image); // 읽어들인 GIF 이미지 제거
 	mp_gif_image = NULL;
-	/*
-	for (int i = 0; i < m_frame_count; ++i)
-	{
-		GdipDisposeImage(mp_frame_list[i]);
-	}
-	delete[] mp_frame_list; // 읽어들인 GIF 이미지의 모든 프레임을 저장해두었던 메모리 해제
-	mp_frame_list = NULL;
-	*/
 	delete[] mp_id_list; // GUID 목록을 저장하기 위해 사용했던 메모리 해제
 	mp_id_list = NULL;
 	free(mp_item); // 프레임 정보를 저장하기 위해 사용했던 메모리 해제
@@ -118,7 +83,6 @@ void GifDasmDlg::DrawClientImage()
 		width = m_gif_display_rect.right - m_gif_display_rect.left;
 		height = m_gif_display_rect.bottom - m_gif_display_rect.top;
 		m_gdip.Draw(mp_gif_image, x, y, width, height);
-		// m_gdip.Draw(mp_frame_list[m_frame_index], x, y, width, height);
 	}
 }
 

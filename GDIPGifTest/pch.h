@@ -9,5 +9,8 @@
 
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
+#include "TXYC_GDIP.h"
+
+#pragma comment(lib, "TXYC_GDIP.lib")
 
 #endif //PCH_H

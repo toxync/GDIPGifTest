@@ -3,8 +3,6 @@
 
 // 클래스 작성자: 박정현(bac6536@naver.com)
 
-#include "TXYC_GDIP.h"
-
 #define THUMB_LIST_ITEM_WIDTH 72
 #define THUMB_LIST_ITEM_HEIGHT 48
 #define THUMB_LIST_ITEM_PADDING 4

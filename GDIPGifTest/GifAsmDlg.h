@@ -4,20 +4,14 @@
 #include "TXYC_ListBox.h"
 #include "TXYC_FrameList.h"
 #include "TXYC_FrameThreadData.h"
-#include "RectPositionFunc.h"
+#include "TXYC_RectPositionFunc.h"
 #include "ProgressDlg.h"
 #include "PreviewDlg.h"
-#include "OctreeQuantizer.h"
 
 // GIF 기준 프레임의 폭과 높이를 저장할 문자열의 길이
 #define FRAME_SIZE_STR_LEN 32
 // 파일 다이얼로그에서 한 번에 읽어들일 수 있는 파일 개수의 최대값
 #define MAX_FILE_COUNT 1024
-
-// 작업 대상 이미지들의 프레임 이미지를 생성하는 스레드가 사용하는 함수
-DWORD WINAPI CreateFrameBitmaps(void* ap_data);
-// 작업 대상 프레임 이미지들의 8비트 변환된 이미지를 생성하는 스레드가 사용하는 함수
-DWORD WINAPI ConvertFrameBitmaps(void* ap_data);
 
 // GifAsmDlg 대화 상자
 class GifAsmDlg : public CDialog
@@ -95,8 +89,6 @@ public:
 	void SetFrameDelay(int a_delta);
 	// 정지된 작업 스레드를 생성한 상태로 작업 상태 표시 다이얼로그를 생성하는 함수
 	void InitFrameThread(UINT8 a_post_thread_action);
-	// 읽어들인 이미지들로 GIF 이미지를 제작하는 함수
-	void CreateGif();
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_GIF_ASM_DLG };

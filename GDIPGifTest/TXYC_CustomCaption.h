@@ -3,7 +3,6 @@
 
 // 클래스 작성자: 박정현(bac6536@naver.com)
 
-#include "TXYC_GDIP.h"
 #include "TXYC_CaptionControl.h"
 #include <vector>
 

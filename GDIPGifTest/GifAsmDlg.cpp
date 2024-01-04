@@ -3,121 +3,6 @@
 #include "GDIPGifTest.h"
 #include "GifAsmDlg.h"
 
-DWORD WINAPI CreateFrameBitmaps(void* ap_data)
-{
-	FrameThreadData* p_data = (FrameThreadData*)ap_data;
-	vector<FrameData>* p_frame_vector = p_data->p_frame_vector;
-	GpBitmap* p_src_bmp = NULL;
-	GpBitmap** p_frame_bmp = NULL;
-	GpGraphics* p_graphics = NULL;
-	RECT image_rect = { 0 }, frame_rect = { 0 };
-	UINT src_cx = 0, src_cy = 0, resized_src_cx = 0, resized_src_cy = 0, kill_flag = 0;
-	UINT frame_cx = p_data->frame_cx, frame_cy = p_data->frame_cy;
-	int x = 0, y = 0;
-	for (int i = 0; i < p_frame_vector->size(); ++i)
-	{
-		// 이벤트 객체의 값이 1이면 스레드 종료
-		if (::WaitForSingleObject(p_data->h_kill_event, 0) == WAIT_OBJECT_0)
-		{
-			kill_flag = 1;
-			// 스레드가 강제로 종료됐다는 사실을 작업 상태 표시 다이얼로그에게 알림
-			::SendMessage(p_data->h_progress_wnd, DESTROY_PROGRESS_DLG, 0, 0);
-			break;
-		}
-		p_src_bmp = (*p_frame_vector)[i].p_src_bmp;
-		p_frame_bmp = &((*p_frame_vector)[i].p_frame_bmp);
-		GdipGetImageWidth(p_src_bmp, &src_cx);
-		GdipGetImageHeight(p_src_bmp, &src_cy);
-		// 원본 이미지의 폭과 높이가 GIF 기준 프레임의 폭과 높이랑 동일하다면 원본 이미지를 그대로 복제한
-		// 프레임 이미지를 생성함
-		if ((frame_cx == src_cx) && (frame_cy == src_cy))
-		{
-			GdipCloneImage(p_src_bmp, (GpImage**)p_frame_bmp);
-		}
-		else // 원본 이미지의 폭과 높이가 GIF 기준 프레임의 폭과 높이랑 동일하지 않을 경우
-		{
-			// GIF 기준 프레임과 크기가 동일한 프레임 이미지를 생성함
-			GdipCreateBitmapFromScan0(frame_cx, frame_cy, 0, PixelFormat32bppARGB, NULL, p_frame_bmp);
-			// 프레임 이미지와 연결된 Graphics 객체를 생성하여 모든 픽셀을 검은색으로 초기화함
-			GdipGetImageGraphicsContext(*p_frame_bmp, &p_graphics);
-			// GdipSetInterpolationMode(p_graphics, InterpolationModeNearestNeighbor);
-			GdipGraphicsClear(p_graphics, 0xFF000000);
-			image_rect.left = image_rect.top = frame_rect.left = frame_rect.top = 0;
-			image_rect.right = src_cx;
-			image_rect.bottom = src_cy;
-			frame_rect.right = frame_cx;
-			frame_rect.bottom = frame_cy;
-			// 원본 이미지를 화면비 유지한 상태로 프레임 이미지에 맞게 확대/축소하면서 가운데 정렬시켰을 때의
-			// 원본 이미지 좌표와 크기를 구함
-			CenterFitRectInRect(&image_rect, &frame_rect);
-			x = image_rect.left;
-			y = image_rect.top;
-			resized_src_cx = image_rect.right - image_rect.left;
-			resized_src_cy = image_rect.bottom - image_rect.top;
-			// 화면비를 유지한 상태로 프레임 이미지에 맞게 확대/축소하면서 가운데 정렬시킨 원본 이미지를
-			// 프레임 이미지에 출력함
-			GdipDrawImageRectI(p_graphics, p_src_bmp, x, y, resized_src_cx, resized_src_cy);
-			// 프레임 이미지와 연결된 Graphics 객체가 더 이상 필요 없으므로 해제함
-			GdipDeleteGraphics(p_graphics);
-		}
-		// 프레임 이미지가 생성될 때마다 작업 하나가 완료되었다는 메시지를 작업 상태 표시 다이얼로그에게 보냄
-		::SendMessage(p_data->h_progress_wnd, SINGLE_WORK_COMPLETE, 0, 0);
-	}
-	// 스레드 작업이 끝났으므로 스레드의 핸들을 닫음
-	::CloseHandle(p_data->h_thread);
-	// 스레드를 강제로 종료했으나 kill_flag의 값이 갱신되지 않았을 경우에 대비해서 이벤트 객체의 값을 다시 확인함
-	// (반복문의 마지막 반복을 수행하는 중에 이벤트 객체의 값을 변경했다면 변경된 이벤트 객체의 값을 확인하지
-	// 않은 상태로 반복문이 종료되어 kill_flag의 값이 갱신되지 않음)
-	if ((!kill_flag) && (::WaitForSingleObject(p_data->h_kill_event, 0) == WAIT_OBJECT_0))
-	{
-		kill_flag = 1;
-		// 스레드가 강제로 종료됐다는 사실을 작업 상태 표시 다이얼로그에게 알림
-		::SendMessage(p_data->h_progress_wnd, DESTROY_PROGRESS_DLG, 0, 0);
-	}
-	// 메인 다이얼로그에게 스레드가 종료됐음을 알림
-	::PostMessage(p_data->h_main_wnd, POST_FRAME_THREAD_ACTION, kill_flag, (LPARAM)p_data);
-	return 0;
-}
-
-DWORD WINAPI ConvertFrameBitmaps(void* ap_data)
-{
-	FrameThreadData* p_data = (FrameThreadData*)ap_data;
-	vector<FrameData>* p_frame_vector = p_data->p_frame_vector;
-	OctreeQuantizer oct_qtzr;
-	GpBitmap* p_src_bmp = NULL;
-	UINT frame_cx = p_data->frame_cx, frame_cy = p_data->frame_cy, kill_flag = 0;
-	for (int i = 0; i < p_frame_vector->size(); ++i)
-	{
-		// 이벤트 객체의 값이 1이면 스레드 종료
-		if (::WaitForSingleObject(p_data->h_kill_event, 0) == WAIT_OBJECT_0)
-		{
-			kill_flag = 1;
-			// 스레드가 강제로 종료됐다는 사실을 작업 상태 표시 다이얼로그에게 알림
-			::SendMessage(p_data->h_progress_wnd, DESTROY_PROGRESS_DLG, 0, 0);
-			break;
-		}
-		// 프레임 이미지의 8비트 컬러 변환 결과 이미지를 생성함
-		p_src_bmp = (*p_frame_vector)[i].p_frame_bmp;
-		(*p_frame_vector)[i].p_cvrt_frame_bmp = oct_qtzr.GetQuantizedFrame(p_src_bmp, 5);
-		// 프레임 이미지가 생성될 때마다 작업 하나가 완료되었다는 메시지를 작업 상태 표시 다이얼로그에게 보냄
-		::SendMessage(p_data->h_progress_wnd, SINGLE_WORK_COMPLETE, 0, 0);
-	}
-	// 스레드 작업이 끝났으므로 스레드의 핸들을 닫음
-	::CloseHandle(p_data->h_thread);
-	// 스레드를 강제로 종료했으나 kill_flag의 값이 갱신되지 않았을 경우에 대비해서 이벤트 객체의 값을 다시 확인함
-	// (반복문의 마지막 반복을 수행하는 중에 이벤트 객체의 값을 변경했다면 변경된 이벤트 객체의 값을 확인하지
-	// 않은 상태로 반복문이 종료되어 kill_flag의 값이 갱신되지 않음)
-	if ((!kill_flag) && (::WaitForSingleObject(p_data->h_kill_event, 0) == WAIT_OBJECT_0))
-	{
-		kill_flag = 1;
-		// 스레드가 강제로 종료됐다는 사실을 작업 상태 표시 다이얼로그에게 알림
-		::SendMessage(p_data->h_progress_wnd, DESTROY_PROGRESS_DLG, 0, 0);
-	}
-	// 메인 다이얼로그에게 스레드가 종료됐음을 알림
-	::PostMessage(p_data->h_main_wnd, POST_FRAME_THREAD_ACTION, kill_flag, (LPARAM)p_data);
-	return 0;
-}
-
 // GifAsmDlg 대화 상자
 IMPLEMENT_DYNAMIC(GifAsmDlg, CDialog)
 
@@ -249,64 +134,6 @@ void GifAsmDlg::InitFrameThread(UINT8 a_post_thread_action)
 	m_progress_dlg.SetThreadDataPtr(p_data);
 	// 작업 상태 표시 다이얼로그를 생성함
 	m_progress_dlg.DoModal();
-}
-
-void GifAsmDlg::CreateGif()
-{
-	GpBitmap* p_cur_bmp = NULL;
-	CLSID cls_id;
-	EncoderParameters encoder_param;
-	EncoderValue e_value = EncoderValueMultiFrame;
-	PropertyItem property_item;
-	GpImage* p_gif_image = NULL;
-	short property_value = -1; // 제작될 GIF 이미지의 반복 횟수를 무제한으로 설정함
-	long* p_value = NULL;
-	UINT frame_count = m_frame_vector.size();
-	m_gdip.GetEncoderClsid(L"image/gif", &cls_id);
-	encoder_param.Count = 1;
-	encoder_param.Parameter[0].Guid = EncoderSaveFlag;
-	encoder_param.Parameter[0].Type = EncoderParameterValueTypeLong;
-	encoder_param.Parameter[0].NumberOfValues = 1;
-	encoder_param.Parameter[0].Value = &e_value;
-	// GIF 이미지에 첫 번째 프레임 삽입
-	p_gif_image = m_frame_vector[0].p_cvrt_frame_bmp;
-	// 제작될 GIF 이미지의 반복 횟수 설정
-	property_item.id = PropertyTagLoopCount;
-	property_item.length = 2;
-	property_item.type = PropertyTagTypeShort;
-	property_item.value = &property_value;
-	GdipSetPropertyItem(p_gif_image, &property_item);
-	// 제작될 GIF 이미지의 프레임 지연 시간 설정
-	p_value = new long[frame_count];
-	for (int i = 0; i < frame_count; ++i)
-	{
-		p_value[i] = m_frame_delay;
-	}
-	property_item.id = PropertyTagFrameDelay;
-	property_item.length = sizeof(long) * frame_count;
-	property_item.type = PropertyTagTypeLong;
-	property_item.value = p_value;
-	GdipSetPropertyItem(p_gif_image, &property_item);
-	delete[] p_value;
-	// 미리 설정해둔 저장 위치에 GIF 이미지 파일 생성
-	GdipSaveImageToFile(p_gif_image, m_gif_save_path, &cls_id, &encoder_param);
-	// GIF 이미지에 두 번째 프레임부터 마지막 프레임까지 삽입
-	e_value = EncoderValueFrameDimensionTime;
-	for (int i = 1; i < frame_count; ++i)
-	{
-		p_cur_bmp = m_frame_vector[i].p_cvrt_frame_bmp;
-		GdipSaveAddImage(p_gif_image, p_cur_bmp, &encoder_param);
-	}
-	e_value = EncoderValueFlush;
-	GdipSaveAdd(p_gif_image, &encoder_param);
-	// GIF 이미지 제작이 완료됐으므로 모든 프레임 이미지를 제거함
-	for (int i = 0; i < frame_count; ++i)
-	{
-		m_gdip.DestroyImage(m_frame_vector[i].p_cvrt_frame_bmp);
-	}
-	// 제작된 GIF 이미지 제거
-	m_gdip.DestroyImage(p_gif_image);
-	AfxMessageBox(L"GIF 이미지 제작 완료");
 }
 
 void GifAsmDlg::DoDataExchange(CDataExchange* pDX)
@@ -490,8 +317,23 @@ afx_msg LRESULT GifAsmDlg::On16000(WPARAM wParam, LPARAM lParam)
 			m_preview_dlg.DoModal();
 			break;
 		case POST_TRD_ACT_CREATE_GIF:
+			UINT frame_cnt = m_frame_vector.size();
+			GpBitmap** p_frame_list = new GpBitmap * [frame_cnt];
+			for (int i = 0; i < frame_cnt; ++i)
+			{
+				*(p_frame_list + i) = m_frame_vector[i].p_cvrt_frame_bmp;
+			}
 			// 프레임 리스트 박스에 추가된 모든 프레임 이미지들로 GIF 이미지를 제작함
-			CreateGif();
+			GpImage* p_gif_image = m_gdip.CreateGif(m_gif_save_path, p_frame_list, frame_cnt, m_frame_delay);
+			// GIF 이미지 제작이 완료됐으므로 모든 프레임 이미지를 제거함
+			for (int i = 0; i < frame_cnt; ++i)
+			{
+				m_gdip.DestroyImage(m_frame_vector[i].p_cvrt_frame_bmp);
+			}
+			delete[] p_frame_list;
+			// 제작된 GIF 이미지 제거
+			m_gdip.DestroyImage(p_gif_image);
+			AfxMessageBox(L"GIF 이미지 제작 완료");
 			break;
 		}
 		// 프레임 벡터가 더 이상 필요 없으므로 저장되어 있던 데이터들을 모두 버림
