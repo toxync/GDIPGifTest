@@ -4,8 +4,10 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 #ignore Library Source files
-TXYC_ListBox.cpp
+TXYC_CustomCaption.cpp
 TXYC_GDIP.cpp
+TXYC_ListBox.cpp
+TXYC_CustomProgress.cpp
 
 # User-specific files
 *.rsuser

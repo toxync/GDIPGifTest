@@ -222,8 +222,6 @@
     <ClCompile Include="PreviewDlg.cpp" />
     <ClCompile Include="ProgressDlg.cpp" />
     <ClCompile Include="TXYC_RectPositionFunc.cpp" />
-    <ClCompile Include="TXYC_CustomCaption.cpp" />
-    <ClCompile Include="TXYC_CustomProgress.cpp" />
     <ClCompile Include="TXYC_FrameList.cpp" />
     <ClCompile Include="TXYC_ThumbnailList.cpp" />
   </ItemGroup>

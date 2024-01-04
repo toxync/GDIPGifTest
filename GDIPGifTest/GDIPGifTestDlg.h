@@ -5,6 +5,8 @@
 #include "GifAsmDlg.h"
 #include "GifExtraDlg.h"
 
+#pragma comment(lib, "TXYC_CustomCaption.lib")
+
 // CGDIPGifTestDlg 대화 상자
 class CGDIPGifTestDlg : public CDialog, public TXYC_CustomCaption
 {

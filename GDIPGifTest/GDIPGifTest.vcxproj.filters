@@ -92,9 +92,6 @@
     <ClCompile Include="TXYC_RectPositionFunc.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="TXYC_CustomCaption.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="TXYC_FrameList.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -111,9 +108,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="ProgressDlg.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="TXYC_CustomProgress.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="TXYC_OctreeQuantizer.cpp">
