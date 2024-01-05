@@ -351,7 +351,7 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
 <details>
   <summary>원본 이미지의 픽셀 색상값을 Octree에 삽입하는 과정(펼치기/접기)</summary><br>
 
-* 설명에 사용된 이미지들은 모두 자체적으로 제작했습니다.
+* 이미지 출처: 자체 제작
 
 ![OctreeAddColor00](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_add_color_00.PNG)
 - - - -
@@ -378,7 +378,7 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
 <details>
   <summary> Octree의 리프 노드가 아닌 노드들을 병합하는 과정(펼치기/접기)</summary><br>
 
-* 설명에 사용된 이미지들은 모두 자체적으로 제작했습니다.
+* 이미지 출처: 자체 제작
 
 ![OctreeReduction00](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/octree_reduction_00.PNG)
 - - - -
