@@ -2,6 +2,15 @@
 
 MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
 
+## 핵심 기능 요약
+* **복수의 자식 비정형 다이얼로그들을 관리하는 사용자 정의 캡션**
+* **드래그 & 드롭으로 파일 읽기**
+  - **정해진 형식의 파일이 아니라면 읽히지 않도록 필터링 수행**
+* **파일 다이얼로그로 복수의 파일 읽기(GIF 제작 기능 한정)**
+* **읽어들인 GIF 이미지의 프레임을 분해해서 저장**
+* **[Octree Quantization](#octree-quantization)을 사용한 RGB 컬러 이미지의 8비트 컬러 이미지 변환 최적화**
+* **읽어들인 이미지 파일들을 GIF 이미지로 제작**
+
 ## 프로젝트 구조
 
 <details>
@@ -320,7 +329,7 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
 </details>
 
 <details>
-  <summary>GIF 기준 프레임 변경 작업 도중 작업 강제 종료(펼치기/접기)</summary><br>
+  <summary>제작될 GIF 이미지의 기준 프레임 변경 작업 도중 작업 강제 종료(펼치기/접기)</summary><br>
 
 ![ResetBaseAbortDemo](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/reset_base_abort_demo.gif)
 
@@ -330,7 +339,8 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
 
 #### Octree Quantization
 
-* 노드 한 개가 최대 8개의 자식 노드를 가질 수 있는 트리 자료구조인 Octree를 사용해서 이미지의 핵심 색상들을 추출해내는 알고리즘입니다.
+* 노드 한 개가 최대 8개의 자식 노드를 가질 수 있는 Octree 자료구조로 이미지의 핵심 색상들을 추출해내고 8비트 컬러 이미지의 팔레트를 최적화하는 알고리즘입니다.
+* 리프 노드의 색상값이 이미지의 핵심 색상값이며, 리프 노드를 리프 노드의 부모 노드에 병합하는 방식으로 리프 노드의 개수를 팔레트 색상 개수에 맞춰서 이미지의 핵심 색상들을 추출합니다.
 
 ##### Octree Quantization의 동작 과정
 1. 원본 이미지의 모든 픽셀 색상값을 Octree에 삽입
@@ -386,3 +396,11 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
 
 </details>
 
+## 참고 자료
+
+* 사용자 정의 캡션 참고 자료
+  - https://github.com/grassator/win32-window-custom-titlebar
+  - https://github.com/melak47/BorderlessWindow
+* Octree Quantization 참고 자료
+  - https://www.codeproject.com/Articles/109133/Octree-Color-Palette
+  - https://www.codeguru.com/multimedia/better-gifs-with-octrees/
