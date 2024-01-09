@@ -3,9 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-#ignore demo images
-demo_images/
-
 #ignore Library Source files
 TXYC_CustomCaption.cpp
 TXYC_GDIP.cpp
