@@ -1,9 +1,6 @@
 ﻿#pragma once
 #include "afxdialogex.h"
 #include "TXYC_FrameThreadData.h"
-#include "TXYC_CustomProgress.h"
-
-#pragma comment(lib, "TXYC_CustomProgress.lib")
 
 // ProgressDlg 대화 상자
 class ProgressDlg : public CDialog

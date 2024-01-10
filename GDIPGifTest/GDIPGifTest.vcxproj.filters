@@ -36,16 +36,7 @@
     <ClInclude Include="TXYC_RectPositionFunc.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="TXYC_CustomCaption.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="TXYC_FrameList.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TXYC_GDIP.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="TXYC_ListBox.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TXYC_ThumbnailList.h">
@@ -60,22 +51,19 @@
     <ClInclude Include="GifExtraDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="TXYC_CaptionControl.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ProgressDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TXYC_FrameThreadData.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="TXYC_CustomProgress.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="TXYC_OctreeQuantizer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="PreviewDlg.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TXYC_CAPTION_GDIP.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

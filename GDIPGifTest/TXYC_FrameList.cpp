@@ -1,8 +1,5 @@
 #include "pch.h"
-#include "TXYC_ListBox.h"
 #include "TXYC_FrameList.h"
-
-#pragma comment(lib, "TXYC_ListBox.lib")
 
 TXYC_FrameListBox::TXYC_FrameListBox()
 {

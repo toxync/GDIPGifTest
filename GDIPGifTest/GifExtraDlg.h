@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "afxdialogex.h"
-#include "TXYC_CaptionControl.h"
 
 // GifExtraDlg 대화 상자
 class GifExtraDlg : public CDialog

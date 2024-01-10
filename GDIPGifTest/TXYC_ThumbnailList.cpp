@@ -1,8 +1,5 @@
 #include "pch.h"
-#include "TXYC_ListBox.h"
 #include "TXYC_ThumbnailList.h"
-
-#pragma comment(lib, "TXYC_ListBox.lib")
 
 TXYC_ThumbnailListBox::TXYC_ThumbnailListBox()
 {

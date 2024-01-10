@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include "afxdialogex.h"
-#include "TXYC_CaptionControl.h"
-#include "TXYC_ListBox.h"
 #include "TXYC_ThumbnailList.h"
 #include "TXYC_RectPositionFunc.h"
 
