@@ -11,6 +11,10 @@
 #include "framework.h"
 #include "TXYC_CAPTION_GDIP.h"
 
-#pragma comment(lib, "TXYC_CAPTION_GDIP.lib")
+#if defined _DEBUG
+#pragma comment(lib, "TXYC_CAPTION_GDIP_DST.lib")
+#else
+#pragma comment(lib, "TXYC_CAPTION_GDIP_RST.lib")
+#endif
 
 #endif //PCH_H
