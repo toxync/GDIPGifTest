@@ -107,7 +107,7 @@ void TXYC_OctreeQuantizer::OctreeNode::ReduceOctree(UINT* ap_leaf_cnt)
 		{
 			continue;
 		}
-		// 현재 노드의 R, G, B 값 총합에 리프 노드의 R, G, B 값 총합을 합친 다음 리프 노드를 제거함
+		// 현재 노드의 R, G, B 값 총합에 리프 노드의 R, G, B 값 총합을 합치고 리프 노드를 제거함
 		m_r_sum += mp_child[i]->m_r_sum;
 		m_g_sum += mp_child[i]->m_g_sum;
 		m_b_sum += mp_child[i]->m_b_sum;
