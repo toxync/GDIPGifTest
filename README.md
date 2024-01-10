@@ -31,7 +31,12 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
   - 특정 이미지의 8비트 컬러 변환 결과를 보여주는 용도로 사용되는 다이얼로그입니다.
   - GifAsmDlg 다이얼로그에서만 사용됩니다.
 * TXYC_CAPTION_GDIP.h
-  - TXYC_CustomCaption, TXYC_GDIP, TXYC_ListBox, TXYC_CustomProgress 클래스와 TXYC_CaptionControl.h 헤더 파일을 묶은 정적 라이브러리입니다.
+  - 아래에 나열된 클래스와 헤더 파일들을 묶어놓은 정적 라이브러리입니다.
+    - TXYC_CustomCaption 클래스
+    - TXYC_GDIP 클래스
+    - TXYC_ListBox 클래스
+    - TXYC_CustomProgress 클래스
+    - TXYC_CaptionControl.h 헤더 파일
   - 미리 컴파일된 헤더 안에 포함시킨 상태로 사용합니다.
 * TXYC_CustomCaption.h
   - 캡션 탭 다이얼로그 관리 기능을 제공하는 클래스입니다.
