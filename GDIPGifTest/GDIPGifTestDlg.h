@@ -1,5 +1,6 @@
 ﻿// GDIPGifTestDlg.h: 헤더 파일
 #pragma once
+#include "TXYC_CustomCaption.h"
 #include "GifDasmDlg.h"
 #include "GifAsmDlg.h"
 #include "GifExtraDlg.h"

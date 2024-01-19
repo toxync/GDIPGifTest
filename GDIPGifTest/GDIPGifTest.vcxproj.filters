@@ -63,7 +63,13 @@
     <ClInclude Include="PreviewDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="TXYC_CAPTION_GDIP.h">
+    <ClInclude Include="TXYC_CaptionControl.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TXYC_CustomCaption.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TXYC_CustomProgress.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -105,6 +111,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="TXYC_FrameThreadData.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TXYC_CustomCaption.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TXYC_CustomProgress.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TXYC_GDIP.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TXYC_ListBox.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

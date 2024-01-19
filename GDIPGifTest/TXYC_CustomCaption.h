@@ -3,6 +3,7 @@
 
 // 클래스 작성자: 박정현(bac6536@naver.com)
 
+#include "TXYC_CaptionControl.h"
 #include <vector>
 
 // 가짜 상단 테두리 높이(가짜 상단 테두리를 그리지 않는다면 이 값을 0으로 설정)

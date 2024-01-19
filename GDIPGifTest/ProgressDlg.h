@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "afxdialogex.h"
+#include "TXYC_CustomProgress.h"
 #include "TXYC_FrameThreadData.h"
 
 // ProgressDlg 대화 상자

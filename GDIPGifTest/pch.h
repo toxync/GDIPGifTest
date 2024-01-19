@@ -9,12 +9,6 @@
 
 // 여기에 미리 컴파일하려는 헤더 추가
 #include "framework.h"
-#include "TXYC_CAPTION_GDIP.h"
-
-#if defined _DEBUG
-#pragma comment(lib, "TXYC_CAPTION_GDIP_DST.lib")
-#else
-#pragma comment(lib, "TXYC_CAPTION_GDIP_RST.lib")
-#endif
+#include "TXYC_GDIP.h"
 
 #endif //PCH_H

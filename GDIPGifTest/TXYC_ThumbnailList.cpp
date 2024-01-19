@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "TXYC_ListBox.h"
 #include "TXYC_ThumbnailList.h"
 
 TXYC_ThumbnailListBox::TXYC_ThumbnailListBox()

@@ -206,7 +206,7 @@ GpBitmap* TXYC_OctreeQuantizer::GetQuantizedFrame(GpBitmap* ap_src_bmp, UINT8 a_
 	PixelFormat src_pixel_fmt = 0, dest_pixel_fmt = PixelFormat8bppIndexed;
 	GifPalette gif_palette;
 	UINT cx = 0, cy = 0, src_stride = 0, dest_stride = 0, total_pixel_cnt = 0, leaf_cnt = 0;
-	UINT8 src_pixel_size = 0, r_val = 0, g_val = 0, b_val = 0, index = 0;
+	UINT8 src_pixel_size = 0, index = 0, r_val = 0, g_val = 0, b_val = 0;
 	UINT8* p_src_scan0 = NULL, * p_src_itr = NULL, * p_src_row = NULL;
 	UINT8* p_dest_scan0 = NULL, * p_dest_itr = NULL, * p_dest_row = NULL;
 	// 팔진 트리의 루트 노드 생성

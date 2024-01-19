@@ -80,6 +80,14 @@ protected:
 	};
 	UINT m_max_color_cnt = GIF_PALETTE_COLORS; // 팔레트의 색상 개수
 	static UINT8 m_max_depth; // 팔진 트리의 최대 깊이
+	inline UINT8 Clamp(int a_val)
+	{
+		if (a_val & -256)
+		{
+			return (a_val < 0) ? 0 : 255;
+		}
+		return (UINT8)a_val;
+	}
 public:
 	// 매개 변수로 주어진 이미지의 8비트 컬러 변환된 결과 이미지를 반환하는 함수
 	GpBitmap* GetQuantizedFrame(GpBitmap* ap_src_bmp, UINT8 a_max_depth);

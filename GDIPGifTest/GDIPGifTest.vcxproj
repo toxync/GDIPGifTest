@@ -191,7 +191,9 @@
     <ClInclude Include="GifAsmDlg.h" />
     <ClInclude Include="GifDasmDlg.h" />
     <ClInclude Include="GifExtraDlg.h" />
-    <ClInclude Include="TXYC_CAPTION_GDIP.h" />
+    <ClInclude Include="TXYC_CaptionControl.h" />
+    <ClInclude Include="TXYC_CustomCaption.h" />
+    <ClInclude Include="TXYC_CustomProgress.h" />
     <ClInclude Include="TXYC_OctreeQuantizer.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PreviewDlg.h" />
@@ -209,7 +211,11 @@
     <ClCompile Include="GifAsmDlg.cpp" />
     <ClCompile Include="GifDasmDlg.cpp" />
     <ClCompile Include="GifExtraDlg.cpp" />
+    <ClCompile Include="TXYC_CustomCaption.cpp" />
+    <ClCompile Include="TXYC_CustomProgress.cpp" />
     <ClCompile Include="TXYC_FrameThreadData.cpp" />
+    <ClCompile Include="TXYC_GDIP.cpp" />
+    <ClCompile Include="TXYC_ListBox.cpp" />
     <ClCompile Include="TXYC_OctreeQuantizer.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
