@@ -72,6 +72,12 @@
     <ClInclude Include="TXYC_CustomProgress.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="TXYC_ListBox.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TXYC_GDIP.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GDIPGifTest.cpp">

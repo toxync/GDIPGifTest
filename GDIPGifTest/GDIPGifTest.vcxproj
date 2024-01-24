@@ -194,6 +194,8 @@
     <ClInclude Include="TXYC_CaptionControl.h" />
     <ClInclude Include="TXYC_CustomCaption.h" />
     <ClInclude Include="TXYC_CustomProgress.h" />
+    <ClInclude Include="TXYC_GDIP.h" />
+    <ClInclude Include="TXYC_ListBox.h" />
     <ClInclude Include="TXYC_OctreeQuantizer.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PreviewDlg.h" />
