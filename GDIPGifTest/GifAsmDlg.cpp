@@ -632,11 +632,12 @@ void GifAsmDlg::OnBnClickedAddFrameImageBtn()
 	DWORD file_dlg_flags = OFN_HIDEREADONLY | OFN_NOCHANGEDIR | OFN_ALLOWMULTISELECT;
 	CFileDialog load_dlg(TRUE, NULL, NULL, file_dlg_flags, ext_filter);
 	// 파일 다이얼로그의 기본 경로를 바탕화면으로 설정
-	::SHGetSpecialFolderPath(NULL, init_path, CSIDL_DESKTOP, FALSE);
+	::SHGetSpecialFolderPath(NULL, NULL, CSIDL_DESKTOP, FALSE);
 	load_dlg.m_ofn.lpstrInitialDir = init_path;
 	// 대량의 이미지들을 읽어들일 수 있도록 이미지들의 경로를 저장하기 위한 문자열을 미리 동적할당함
 	buf_size = (MAX_FILE_COUNT * (MAX_PATH + 1)) + 1;
 	p_file_str = new wchar_t[buf_size];
+	memset(p_file_str, 0, buf_size * sizeof(wchar_t));
 	load_dlg.m_ofn.lpstrFile = p_file_str;
 	load_dlg.m_ofn.nMaxFile = buf_size;
 	if (load_dlg.DoModal() == IDOK)
