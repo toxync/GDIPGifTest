@@ -85,14 +85,14 @@ MFC와 GDI+로 제작된 GIF 이미지 분해/제작 소프트웨어입니다.
   - Ctrl + Tab 또는 Ctrl + Shift + Tab 키 조합의 입력
 
 <details>
-  <summary>마우스로 캡션 탭을 클릭해서 다른 캡션 탭으로 이동(펼치기/접기)</summary><br>
+  <summary>마우스 클릭을 통해 다른 캡션 탭으로 이동(펼치기/접기)</summary><br>
 
 ![CaptionTabMouseDemo](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/caption_tab_mouse_demo.gif)
 
 </details>
 
 <details>
-  <summary>단축키 조합을 입력해서 다른 캡션 탭으로 이동(펼치기/접기)</summary><br>
+  <summary>단축키 조합의 입력을 통해 다른 캡션 탭으로 이동(펼치기/접기)</summary><br>
 
 ![CaptionTabKeyDemo](https://raw.githubusercontent.com/toxync/GDIPGifTest/master/demo_images/caption_tab_key_demo.gif)
 
